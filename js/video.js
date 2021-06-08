@@ -38,7 +38,7 @@ btnfast.addEventListener("click", function () {
 })
 
 btnskip.addEventListener("click", function () {
-	var skip_time = video.currentTime + 15
+	let skip_time = video.currentTime + 15
 	if (skip_time < video.duration) {
 		video.currentTime = skip_time
 	} else if (skip_time >= video.currentTime) {
