@@ -7,59 +7,62 @@ var btnskip = document.getElementById("skip");
 var btnmute = document.getElementById("mute");
 var slider = document.getElementById("slider");
 var volume = document.getElementById("volume");
-var btnold=document.getElementById("vintage");
-var btnorg=document.getElementById("orig")
+var btnold = document.getElementById("vintage");
+var btnorg = document.getElementById("orig")
 
 video.autoplay = false
 video.loop = true
-video.load()
+delete video.src
 
 window.addEventListener("load", function () {
 	console.log("Good job opening the window")
 });
 
 btnstart.addEventListener("click", function () {
+	if (video.src == null) {
+		video.src = 'assets/marchingband.mov'
+		video.load()
+	}
 	video.play()
 	volume.innerText = slider.value + "%"
-	console.log("play video")
 })
 
 btnpause.addEventListener("click", function () {
 	video.pause()
-	console.log("pause video")
 })
 
 btnslow.addEventListener("click", function () {
 	video.playbackRate = video.playbackRate * (1 - 0.05)
-	console.log(video.playbackRate)
+	console.log("New Speed:"+video.playbackRate)
 })
 
 btnfast.addEventListener("click", function () {
 	video.playbackRate = video.playbackRate / (1 - 0.05)
-	console.log(video.playbackRate)
+	console.log("New Speed:"+video.playbackRate)
 })
 
 btnskip.addEventListener("click", function () {
 	var skip_time = video.currentTime + 15
-	if (skip_time < video.duration) {
+	if (skip_time <= video.duration) {
 		video.currentTime = skip_time
-	} else if (skip_time >= video.currentTime) {
-		video.currentTime = video.duration
+	} else if (skip_time > video.currentTime) {
+		video.currentTime = 0
 	}
 	video.play()
+	console.log("New location:"+video.currentTime)
 })
 
 btnmute.addEventListener("click", function () {
 	if (video.muted) {
 		video.muted = false
 		this.innerHTML = "Mute"
-		slider.value=video.volume*100
-		volume.innerText=video.volume*100+"%"
+		slider.value = video.volume * 100
+		volume.innerText = video.volume * 100 + "%"
 	} else if (!video.muted) {
 		video.muted = true
 		this.innerHTML = "Unmute"
-		slider.value=0
-		volume.innerText=0
+		slider.value = 0
+		volume.innerText = 0
 	}
 })
 
@@ -68,7 +71,7 @@ slider.addEventListener("mouseup", function () {
 	video.volume = slider.value / 100
 	if (slider.value == 0) {
 		btnmute.innerHTML = "Unmute"
-	}else{
+	} else {
 		btnmute.innerHTML = "Mute"
 	}
 })
