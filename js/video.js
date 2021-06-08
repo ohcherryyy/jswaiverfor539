@@ -7,6 +7,8 @@ var btnskip = document.getElementById("skip");
 var btnmute = document.getElementById("mute");
 var slider = document.getElementById("slider");
 var volume = document.getElementById("volume");
+var btnold=document.getElementById("vintage");
+var btnorg=document.getElementById("orig")
 
 video.autoplay = false
 video.loop = true
@@ -38,7 +40,7 @@ btnfast.addEventListener("click", function () {
 })
 
 btnskip.addEventListener("click", function () {
-	let skip_time = video.currentTime + 15
+	var skip_time = video.currentTime + 15
 	if (skip_time < video.duration) {
 		video.currentTime = skip_time
 	} else if (skip_time >= video.currentTime) {
@@ -69,6 +71,14 @@ slider.addEventListener("mouseup", function () {
 	}else{
 		btnmute.innerHTML = "Mute"
 	}
+})
+
+btnold.addEventListener("click", function () {
+	video.className = "oldSchool"
+})
+
+btnorg.addEventListener("click", function () {
+	video.className = "video"
 })
 
 // document.querySelector("#play").addEventListener("click", function() {
