@@ -12,17 +12,12 @@ var btnorg = document.getElementById("orig")
 
 video.autoplay = false
 video.loop = true
-delete video.src
 
 window.addEventListener("load", function () {
 	console.log("Good job opening the window")
 });
 
 btnstart.addEventListener("click", function () {
-	if (video.src == null) {
-		video.src = 'assets/marchingband.mov'
-		video.load()
-	}
 	video.play()
 	volume.innerText = slider.value + "%"
 })
